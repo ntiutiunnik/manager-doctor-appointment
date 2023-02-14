@@ -1,0 +1,15 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd"
+                   context="update_db">
+
+    <changeSet id="1676376843_01" author="admin">
+        <preConditions onError="HALT" onFail="MARK_RAN">
+            <tableExists tableName="appointment"/>
+        </preConditions>
+
+        <addUniqueConstraint tableName="appointment" columnNames="doctor_schedule_id, user_id" constraintName="uc_doctor_schedule_id_user_id"/>
+    </changeSet>
+</databaseChangeLog>

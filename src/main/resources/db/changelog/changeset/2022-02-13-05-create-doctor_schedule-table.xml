@@ -1,0 +1,41 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd"
+                   context="update_db">
+
+    <changeSet id="1676286900_01" author="admin">
+        <preConditions onError="HALT" onFail="MARK_RAN">
+            <not>
+                <sequenceExists sequenceName="doctor_schedule_id_seq"/>
+            </not>
+        </preConditions>
+
+        <createSequence sequenceName="doctor_schedule_id_seq" startValue="1" incrementBy="1"/>
+    </changeSet>
+
+    <changeSet id="1676286900_02" author="admin">
+        <preConditions onError="HALT" onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="doctor_schedule"/>
+            </not>
+            <tableExists tableName="doctor"/>
+            <tableExists tableName="time_slot"/>
+        </preConditions>
+
+        <createTable tableName="doctor_schedule">
+            <column name="id" type="BIGINT" defaultValueSequenceNext="doctor_schedule_id_seq">
+                <constraints primaryKey="true"/>
+            </column>
+
+            <column name="doctor_id" type="BIGINT">
+                <constraints foreignKeyName="fk_doctor_schedule_doctor" references="doctor(id)" nullable="false"/>
+            </column>
+
+            <column name="time_slot_id" type="BIGINT">
+                <constraints foreignKeyName="fk_doctor_schedule_time_slot" references="time_slot(id)" nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,55 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd"
+                   context="update_db">
+
+    <changeSet id="1676286901_01" author="admin">
+        <preConditions onError="HALT" onFail="MARK_RAN">
+            <not>
+                <sequenceExists sequenceName="appointment_id_seq"/>
+            </not>
+        </preConditions>
+
+        <createSequence sequenceName="appointment_id_seq" startValue="1" incrementBy="1"/>
+    </changeSet>
+
+    <changeSet id="1676286901_02" author="admin">
+        <preConditions onError="HALT" onFail="MARK_RAN">
+            <not>
+                <sequenceExists sequenceName="appointment_number_seq"/>
+            </not>
+        </preConditions>
+
+        <createSequence sequenceName="appointment_number_seq" startValue="1" incrementBy="1"/>
+    </changeSet>
+
+    <changeSet id="1676286901_03" author="admin">
+        <preConditions onError="HALT" onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="appointment"/>
+            </not>
+            <tableExists tableName="doctor_schedule"/>
+            <tableExists tableName="user"/>
+        </preConditions>
+
+        <createTable tableName="appointment">
+            <column name="id" type="BIGINT" defaultValueSequenceNext="appointment_id_seq">
+                <constraints primaryKey="true"/>
+            </column>
+
+            <column name="number" type="BIGINT" defaultValueSequenceNext="appointment_number_seq">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="doctor_schedule_id" type="BIGINT">
+                <constraints foreignKeyName="fk_appointment_doctor_schedule" references="doctor_schedule(id)" nullable="false"/>
+            </column>
+
+            <column name="user_id" type="BIGINT">
+                <constraints foreignKeyName="fk_appointment_user" references="user(id)" nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>
