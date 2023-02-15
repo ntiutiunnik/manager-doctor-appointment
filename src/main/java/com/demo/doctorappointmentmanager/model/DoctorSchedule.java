@@ -11,14 +11,14 @@ public class DoctorSchedule {
     @SequenceGenerator(name = "doctor_schedule_id_generator", sequenceName = "doctor_schedule_id_seq", allocationSize = 1)
     private Long id;
 
-    @OneToOne(mappedBy = "doctorSchedule")
+    @OneToOne(mappedBy = "doctorSchedule", fetch = FetchType.LAZY)
     private Appointment appointment;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "doctor_id")
     private Doctor doctor;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "time_slot_id")
     private TimeSlot timeSlot;
 

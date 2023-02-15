@@ -1,13 +1,14 @@
 package com.demo.doctorappointmentmanager.controller.impl;
 
 import com.demo.doctorappointmentmanager.controller.AbstractCrudController;
-import com.demo.doctorappointmentmanager.dto.DoctorDto;
-import com.demo.doctorappointmentmanager.mapper.DoctorMapper;
+import com.demo.doctorappointmentmanager.dto.impl.DoctorDto;
+import com.demo.doctorappointmentmanager.mapper.impl.DoctorMapper;
 import com.demo.doctorappointmentmanager.model.Doctor;
 import com.demo.doctorappointmentmanager.repository.DoctorRepository;
 import com.demo.doctorappointmentmanager.service.impl.DoctorService;
 import com.demo.doctorappointmentmanager.specification.filter.DoctorFilterParam;
 import com.demo.doctorappointmentmanager.util.OffsetLimitPageable;
+import com.demo.doctorappointmentmanager.util.resource.GeneralResource;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/doctor")
+@RequestMapping(GeneralResource.PATH + "/doctor")
 public class DoctorController extends AbstractCrudController<Doctor, Long, DoctorDto, DoctorService, DoctorMapper, DoctorRepository> {
 
     public DoctorController(DoctorService doctorService) {

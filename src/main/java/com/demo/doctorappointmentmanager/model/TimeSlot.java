@@ -11,8 +11,8 @@ import java.util.Objects;
 public class TimeSlot {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "timeslot_id_generator")
-    @SequenceGenerator(name = "timeslot_id_generator", sequenceName = "timeslot_id_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "time_slot_id_generator")
+    @SequenceGenerator(name = "time_slot_id_generator", sequenceName = "time_slot_id_seq", allocationSize = 1)
     private Long id;
 
     private LocalDateTime startTime;

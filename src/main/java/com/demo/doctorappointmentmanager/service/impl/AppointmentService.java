@@ -1,7 +1,7 @@
 package com.demo.doctorappointmentmanager.service.impl;
 
-import com.demo.doctorappointmentmanager.dto.AppointmentDto;
-import com.demo.doctorappointmentmanager.mapper.AppointmentMapper;
+import com.demo.doctorappointmentmanager.dto.impl.AppointmentDto;
+import com.demo.doctorappointmentmanager.mapper.impl.AppointmentMapper;
 import com.demo.doctorappointmentmanager.model.Appointment;
 import com.demo.doctorappointmentmanager.repository.AppointmentRepository;
 import com.demo.doctorappointmentmanager.service.AbstractService;

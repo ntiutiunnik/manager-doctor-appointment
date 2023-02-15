@@ -1,8 +1,9 @@
-package com.demo.doctorappointmentmanager.dto;
+package com.demo.doctorappointmentmanager.dto.impl;
 
+import com.demo.doctorappointmentmanager.dto.BasicDto;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class AppointmentDto {
+public class AppointmentDto implements BasicDto<Long> {
 
     private Long id;
 

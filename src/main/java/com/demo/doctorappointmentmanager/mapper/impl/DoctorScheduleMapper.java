@@ -1,6 +1,7 @@
-package com.demo.doctorappointmentmanager.mapper;
+package com.demo.doctorappointmentmanager.mapper.impl;
 
-import com.demo.doctorappointmentmanager.dto.DoctorScheduleDto;
+import com.demo.doctorappointmentmanager.dto.impl.DoctorScheduleDto;
+import com.demo.doctorappointmentmanager.mapper.AbstractMapper;
 import com.demo.doctorappointmentmanager.mapper.config.DoctorAppointmentMapperConfig;
 import com.demo.doctorappointmentmanager.model.DoctorSchedule;
 import org.mapstruct.Mapper;

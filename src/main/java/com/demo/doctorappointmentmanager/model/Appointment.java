@@ -14,11 +14,11 @@ public class Appointment {
 
     private Long number;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "doctor_schedule_id", referencedColumnName = "id")
     private DoctorSchedule doctorSchedule;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
 

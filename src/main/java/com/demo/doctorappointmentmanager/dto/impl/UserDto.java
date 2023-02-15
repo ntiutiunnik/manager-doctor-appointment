@@ -1,10 +1,15 @@
-package com.demo.doctorappointmentmanager.dto;
+package com.demo.doctorappointmentmanager.dto.impl;
 
+import com.demo.doctorappointmentmanager.dto.BasicDto;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class DoctorDto {
+public class UserDto implements BasicDto<Long> {
 
     private Long id;
+
+    private String email;
+
+    private String password;
 
     @JsonProperty("first name")
     private String firstName;
@@ -12,15 +17,28 @@ public class DoctorDto {
     @JsonProperty("last name")
     private String lastName;
 
-    @JsonProperty("years of experience")
-    private Integer experienceYears;
-
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getFirstName() {
@@ -37,13 +55,5 @@ public class DoctorDto {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
-    }
-
-    public Integer getExperienceYears() {
-        return experienceYears;
-    }
-
-    public void setExperienceYears(Integer experienceYears) {
-        this.experienceYears = experienceYears;
     }
 }

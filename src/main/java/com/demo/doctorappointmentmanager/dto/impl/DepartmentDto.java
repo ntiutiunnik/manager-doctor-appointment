@@ -1,6 +1,8 @@
-package com.demo.doctorappointmentmanager.dto;
+package com.demo.doctorappointmentmanager.dto.impl;
 
-public class DepartmentDto {
+import com.demo.doctorappointmentmanager.dto.BasicDto;
+
+public class DepartmentDto implements BasicDto<Long> {
 
     private Long id;
 

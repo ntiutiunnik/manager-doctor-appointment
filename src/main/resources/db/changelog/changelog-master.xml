@@ -10,5 +10,9 @@
     <include file="/db/changelog/changeset/2022-02-13-04-create-time_slot-table.xml"/>
     <include file="/db/changelog/changeset/2022-02-13-05-create-doctor_schedule-table.xml"/>
     <include file="/db/changelog/changeset/2022-02-13-06-create-appointment-table.xml"/>
+    <include file="/db/changelog/changeset/2022-02-14-01-add-unique-constraint-doctor_schedule.xml"/>
+    <include file="/db/changelog/changeset/2022-02-14-02-add-unique-constraint-appointment.xml"/>
+    <include file="/db/changelog/changeset/2022-02-15-01-add-time_slot-start-end-constraint.xml"/>
+    <include file="/db/changelog/changeset/2022-02-15-02-add-time_slot-exclude-time-intersection-constraint.xml"/>
 
 </databaseChangeLog>

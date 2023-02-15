@@ -12,7 +12,7 @@ public class OffsetLimitPageable extends PageRequest {
     private final int offset;
 
     protected OffsetLimitPageable(int offset, int limit) {
-        super(offset, limit, Sort.unsorted());
+        super(offset, limit, Sort.by("id"));
         this.offset = offset;
     }
 

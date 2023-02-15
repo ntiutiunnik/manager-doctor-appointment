@@ -1,11 +1,10 @@
 package com.demo.doctorappointmentmanager.service.impl;
 
-import com.demo.doctorappointmentmanager.dto.DoctorDto;
-import com.demo.doctorappointmentmanager.mapper.DoctorMapper;
+import com.demo.doctorappointmentmanager.dto.impl.DoctorDto;
+import com.demo.doctorappointmentmanager.mapper.impl.DoctorMapper;
 import com.demo.doctorappointmentmanager.model.Doctor;
 import com.demo.doctorappointmentmanager.repository.DoctorRepository;
 import com.demo.doctorappointmentmanager.service.AbstractService;
-import com.demo.doctorappointmentmanager.specification.DoctorSpecification;
 import com.demo.doctorappointmentmanager.specification.filter.DoctorFilterParam;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -22,7 +21,8 @@ public class DoctorService extends AbstractService<Doctor, Long, DoctorDto, Doct
     }
 
     public List<DoctorDto> findAllDoctors(DoctorFilterParam doctorFilterParam, PageRequest pageRequest) {
-        Page<Doctor> doctorPage = repository.findAll(DoctorSpecification.getFilteredDoctors(doctorFilterParam), pageRequest);
+//        Page<Doctor> doctorPage = repository.findAll(DoctorSpecification.getFilteredDoctors(doctorFilterParam), pageRequest);
+        Page<Doctor> doctorPage = repository.findAll(pageRequest);
 
         return mapper.entitiesToDtos(doctorPage.getContent());
     }

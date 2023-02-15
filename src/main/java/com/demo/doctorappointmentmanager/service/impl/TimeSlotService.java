@@ -1,7 +1,7 @@
 package com.demo.doctorappointmentmanager.service.impl;
 
-import com.demo.doctorappointmentmanager.dto.TimeSlotDto;
-import com.demo.doctorappointmentmanager.mapper.TimeSlotMapper;
+import com.demo.doctorappointmentmanager.dto.impl.TimeSlotDto;
+import com.demo.doctorappointmentmanager.mapper.impl.TimeSlotMapper;
 import com.demo.doctorappointmentmanager.model.TimeSlot;
 import com.demo.doctorappointmentmanager.repository.TimeSlotRepository;
 import com.demo.doctorappointmentmanager.service.AbstractService;
