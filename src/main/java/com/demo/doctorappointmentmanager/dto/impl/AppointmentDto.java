@@ -10,10 +10,9 @@ public class AppointmentDto implements BasicDto<Long> {
     private Long number;
 
     @JsonProperty("doctor schedule")
-    private DoctorScheduleDto doctorScheduleDto;
+    private DoctorScheduleDto doctorSchedule;
 
-    @JsonProperty("user")
-    private UserDto userDto;
+    private AccountDto account;
 
     public Long getId() {
         return id;
@@ -31,19 +30,19 @@ public class AppointmentDto implements BasicDto<Long> {
         this.number = number;
     }
 
-    public DoctorScheduleDto getDoctorScheduleDto() {
-        return doctorScheduleDto;
+    public DoctorScheduleDto getDoctorSchedule() {
+        return doctorSchedule;
     }
 
-    public void setDoctorScheduleDto(DoctorScheduleDto doctorScheduleDto) {
-        this.doctorScheduleDto = doctorScheduleDto;
+    public void setDoctorSchedule(DoctorScheduleDto doctorScheduleDto) {
+        this.doctorSchedule = doctorScheduleDto;
     }
 
-    public UserDto getUserDto() {
-        return userDto;
+    public AccountDto getAccount() {
+        return account;
     }
 
-    public void setUserDto(UserDto userDto) {
-        this.userDto = userDto;
+    public void setAccount(AccountDto accountDto) {
+        this.account = accountDto;
     }
 }

@@ -1,20 +1,24 @@
 package com.demo.doctorappointmentmanager.specification.filter;
 
 import jakarta.servlet.http.HttpServletRequest;
-import org.apache.commons.lang3.StringUtils;
+
+import static com.demo.doctorappointmentmanager.util.RequestParamParser.getLongValue;
 
 public class DoctorScheduleFilterParam {
     private Long doctorId;
 
-    protected DoctorScheduleFilterParam(Long doctorId) {
+    private Long timeSlotId;
+
+    protected DoctorScheduleFilterParam(Long doctorId, Long timeSlotId) {
         this.doctorId = doctorId;
+        this.timeSlotId = timeSlotId;
     }
 
     public static DoctorScheduleFilterParam of(HttpServletRequest httpServletRequest) {
-        String doctorIdString = httpServletRequest.getParameter("doctor_id");
-        Long doctorId = StringUtils.isEmpty(doctorIdString) ? null : Long.parseLong(doctorIdString);
+        Long doctorId = getLongValue(httpServletRequest, "doctor_id");
+        Long timeSlotId = getLongValue(httpServletRequest, "time_slot_id");
 
-        return new DoctorScheduleFilterParam(doctorId);
+        return new DoctorScheduleFilterParam(doctorId, timeSlotId);
     }
 
     public Long getDoctorId() {
@@ -23,5 +27,13 @@ public class DoctorScheduleFilterParam {
 
     public void setDoctorId(Long doctorId) {
         this.doctorId = doctorId;
+    }
+
+    public Long getTimeSlotId() {
+        return timeSlotId;
+    }
+
+    public void setTimeSlotId(Long timeSlotId) {
+        this.timeSlotId = timeSlotId;
     }
 }

@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
-public class TimeSlot {
+public class TimeSlot implements BasicEntity<Long> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "time_slot_id_generator")

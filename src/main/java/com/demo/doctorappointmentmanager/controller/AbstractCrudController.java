@@ -2,6 +2,7 @@ package com.demo.doctorappointmentmanager.controller;
 
 import com.demo.doctorappointmentmanager.dto.BasicDto;
 import com.demo.doctorappointmentmanager.mapper.AbstractMapper;
+import com.demo.doctorappointmentmanager.model.BasicEntity;
 import com.demo.doctorappointmentmanager.service.AbstractService;
 import com.demo.doctorappointmentmanager.util.OffsetLimitPageable;
 import jakarta.servlet.http.HttpServletRequest;
@@ -14,7 +15,7 @@ import java.util.List;
 
 import static com.demo.doctorappointmentmanager.util.resource.RestParams.ID_PATH_PARAM;
 
-public abstract class AbstractCrudController<T, ID, DTO extends BasicDto<ID>, S extends AbstractService<T, ID, DTO, M, R>, M extends AbstractMapper<T, DTO>, R extends JpaRepository<T, ID>> {
+public abstract class AbstractCrudController<T extends BasicEntity<ID>, ID, DTO extends BasicDto<ID>, S extends AbstractService<T, ID, DTO, M, R>, M extends AbstractMapper<T, DTO>, R extends JpaRepository<T, ID>> {
 
     protected final S service;
 
@@ -42,9 +43,9 @@ public abstract class AbstractCrudController<T, ID, DTO extends BasicDto<ID>, S 
     @PostMapping(
             consumes = "application/json"
     )
-    public ResponseEntity<DTO> save(@RequestBody DTO entity) {
-        DTO resultEntity = service.save(entity);
-        return new ResponseEntity<>(resultEntity, HttpStatus.OK);
+    public ResponseEntity<DTO> save(@RequestBody DTO dto) {
+        DTO resultDto = service.save(dto);
+        return new ResponseEntity<>(resultDto, HttpStatus.OK);
     }
 
     @DeleteMapping(

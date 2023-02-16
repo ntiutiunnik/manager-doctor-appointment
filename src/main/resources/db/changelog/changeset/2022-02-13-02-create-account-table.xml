@@ -8,26 +8,26 @@
     <changeSet id="1676286897_01" author="admin">
         <preConditions onError="HALT" onFail="MARK_RAN">
             <not>
-                <sequenceExists sequenceName="user_id_seq"/>
+                <sequenceExists sequenceName="account_id_seq"/>
             </not>
         </preConditions>
 
-        <createSequence sequenceName="user_id_seq" startValue="1" incrementBy="1"/>
+        <createSequence sequenceName="account_id_seq" startValue="1" incrementBy="1"/>
     </changeSet>
 
     <changeSet id="1676286897_02" author="admin">
         <preConditions onError="HALT" onFail="MARK_RAN">
             <not>
-                <tableExists tableName="user"/>
+                <tableExists tableName="account"/>
             </not>
         </preConditions>
 
-        <createTable tableName="user">
-            <column name="id" type="BIGINT" defaultValueSequenceNext="user_id_seq">
+        <createTable tableName="account">
+            <column name="id" type="BIGINT" defaultValueSequenceNext="account_id_seq">
                 <constraints primaryKey="true"/>
             </column>
 
-            <column name="email" type="VARCHAR(255)">
+            <column name="login" type="VARCHAR(255)">
                 <constraints nullable="false" unique="true"/>
             </column>
 

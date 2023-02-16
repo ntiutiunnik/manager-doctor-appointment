@@ -30,7 +30,6 @@ public class DoctorController extends AbstractCrudController<Doctor, Long, Docto
     @GetMapping
     public ResponseEntity<List<DoctorDto>> findAll(HttpServletRequest httpServletRequest) {
         List<DoctorDto> doctors = service.findAllDoctors(DoctorFilterParam.of(httpServletRequest), OffsetLimitPageable.of(httpServletRequest));
-
         return new ResponseEntity<>(doctors, HttpStatus.OK);
     }
 }

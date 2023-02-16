@@ -1,9 +1,9 @@
 package com.demo.doctorappointmentmanager.specification.filter;
 
 import jakarta.servlet.http.HttpServletRequest;
-import org.apache.commons.lang3.StringUtils;
 
-//make abstract?
+import static com.demo.doctorappointmentmanager.util.RequestParamParser.getLongValue;
+
 public class DoctorFilterParam {
     private Long departmentId;
 
@@ -12,9 +12,7 @@ public class DoctorFilterParam {
     }
 
     public static DoctorFilterParam of(HttpServletRequest httpServletRequest) {
-        String departmentIdString = httpServletRequest.getParameter("department_id");
-        Long departmentId = StringUtils.isEmpty(departmentIdString) ? null : Long.parseLong(departmentIdString);
-
+        Long departmentId = getLongValue(httpServletRequest, "department_id");
         return new DoctorFilterParam(departmentId);
     }
 

@@ -8,9 +8,9 @@
     <changeSet id="1676376843_01" author="admin">
         <preConditions onError="HALT" onFail="MARK_RAN">
             <tableExists tableName="appointment"/>
-            <sqlCheck expectedResult="0">SELECT COUNT(*) FROM pg_constraint WHERE conname = 'uc_doctor_schedule_id_user_id'</sqlCheck>
+            <sqlCheck expectedResult="0">SELECT COUNT(*) FROM pg_constraint WHERE conname = 'uc_doctor_schedule_id'</sqlCheck>
         </preConditions>
 
-        <addUniqueConstraint tableName="appointment" columnNames="doctor_schedule_id, user_id" constraintName="uc_doctor_schedule_id_user_id"/>
+        <addUniqueConstraint tableName="appointment" columnNames="doctor_schedule_id" constraintName="uc_doctor_schedule_id"/>
     </changeSet>
 </databaseChangeLog>

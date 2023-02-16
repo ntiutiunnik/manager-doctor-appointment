@@ -30,7 +30,6 @@ public class DoctorScheduleController extends AbstractCrudController<DoctorSched
     @GetMapping
     public ResponseEntity<List<DoctorScheduleDto>> findAll(HttpServletRequest httpServletRequest) {
         List<DoctorScheduleDto> doctorScheduleDtos = service.findAllDoctorSchedules(DoctorScheduleFilterParam.of(httpServletRequest), OffsetLimitPageable.of(httpServletRequest));
-
         return new ResponseEntity<>(doctorScheduleDtos, HttpStatus.OK);
     }
 }

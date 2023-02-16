@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import java.util.Objects;
 
 @Entity
-public class DoctorSchedule {
+public class DoctorSchedule implements BasicEntity<Long> {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "doctor_schedule_id_generator")
     @SequenceGenerator(name = "doctor_schedule_id_generator", sequenceName = "doctor_schedule_id_seq", allocationSize = 1)

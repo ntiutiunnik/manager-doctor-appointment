@@ -7,14 +7,14 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
-public class User {
+public class Account implements BasicEntity<Long> {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_id_generator")
-    @SequenceGenerator(name = "user_id_generator", sequenceName = "user_id_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "account_id_generator")
+    @SequenceGenerator(name = "account_id_generator", sequenceName = "account_id_seq", allocationSize = 1)
     private Long id;
 
-    private String email;
+    private String login;
 
     private String password;
 
@@ -22,15 +22,15 @@ public class User {
 
     private String lastName;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "account")
     private List<Appointment> appointmentList = new ArrayList<>();
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
-        return Objects.equals(id, user.id);
+        Account account = (Account) o;
+        return Objects.equals(id, account.id);
     }
 
     @Override
@@ -46,12 +46,12 @@ public class User {
         this.id = id;
     }
 
-    public String getEmail() {
-        return email;
+    public String getLogin() {
+        return login;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setLogin(String login) {
+        this.login = login;
     }
 
     public String getPassword() {

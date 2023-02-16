@@ -1,17 +1,21 @@
 package com.demo.doctorappointmentmanager.model;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.Generated;
+import org.hibernate.annotations.GenerationTime;
 
 import java.util.Objects;
 
 @Entity
-public class Appointment {
+public class Appointment implements BasicEntity<Long> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "appointment_id_generator")
     @SequenceGenerator(name = "appointment_id_generator", sequenceName = "appointment_id_seq", allocationSize = 1)
     private Long id;
 
+    @Generated(GenerationTime.INSERT)
+//    @SequenceGenerator(name = "appointment_number_generator", sequenceName = "appointment_number_seq", allocationSize = 1)
     private Long number;
 
     @OneToOne(fetch = FetchType.LAZY, optional = false)
@@ -19,8 +23,8 @@ public class Appointment {
     private DoctorSchedule doctorSchedule;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
-    private User user;
+    @JoinColumn(name = "account_id")
+    private Account account;
 
     @Override
     public boolean equals(Object o) {
@@ -59,11 +63,11 @@ public class Appointment {
         this.doctorSchedule = doctorSchedule;
     }
 
-    public User getUser() {
-        return user;
+    public Account getAccount() {
+        return account;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setAccount(Account account) {
+        this.account = account;
     }
 }

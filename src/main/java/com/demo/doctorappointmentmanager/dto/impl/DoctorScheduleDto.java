@@ -1,13 +1,14 @@
 package com.demo.doctorappointmentmanager.dto.impl;
 
 import com.demo.doctorappointmentmanager.dto.BasicDto;
+import com.demo.doctorappointmentmanager.dto.shortened.ShortDoctorDto;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class DoctorScheduleDto implements BasicDto<Long> {
 
     private Long id;
 
-    private DoctorDto doctor;
+    private ShortDoctorDto doctor;
 
     @JsonProperty("time slot")
     private TimeSlotDto timeSlot;
@@ -20,11 +21,11 @@ public class DoctorScheduleDto implements BasicDto<Long> {
         this.id = id;
     }
 
-    public DoctorDto getDoctor() {
+    public ShortDoctorDto getDoctor() {
         return doctor;
     }
 
-    public void setDoctor(DoctorDto doctor) {
+    public void setDoctor(ShortDoctorDto doctor) {
         this.doctor = doctor;
     }
 

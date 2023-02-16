@@ -18,6 +18,11 @@ public class DoctorScheduleSpecification {
                 predicates.add(criteriaBuilder.equal(root.get("doctor").<Long> get("id"), doctorId));
             }
 
+            Long timeSlotId = params.getTimeSlotId();
+            if (timeSlotId != null) {
+                predicates.add(criteriaBuilder.equal(root.get("timeSlot").<Long> get("id"), timeSlotId));
+            }
+
             return criteriaBuilder.and(predicates.toArray(new Predicate[0]));
         };
     }

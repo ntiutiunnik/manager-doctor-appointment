@@ -7,7 +7,13 @@ import com.demo.doctorappointmentmanager.model.Appointment;
 import org.mapstruct.Mapper;
 import org.springframework.stereotype.Component;
 
-@Mapper(config = DoctorAppointmentMapperConfig.class)
+@Mapper(
+        config = DoctorAppointmentMapperConfig.class,
+        uses = {
+                DoctorScheduleMapper.class,
+                AccountMapper.class
+        }
+)
 @Component
 public interface AppointmentMapper extends AbstractMapper<Appointment, AppointmentDto> {
 }

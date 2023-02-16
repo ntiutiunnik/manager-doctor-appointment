@@ -3,6 +3,9 @@ package com.demo.doctorappointmentmanager.config;
 import com.demo.doctorappointmentmanager.exception.CustomCrudException;
 import com.demo.doctorappointmentmanager.exception.ErrorDetails;
 import com.demo.doctorappointmentmanager.exception.ResourceNotFoundException;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.springframework.beans.TypeMismatchException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageConversionException;
@@ -14,28 +17,35 @@ import java.util.Date;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
+    private final static Logger logger = LogManager.getLogger(GlobalExceptionHandler.class);
 
     @ExceptionHandler(ResourceNotFoundException.class)
-    public ResponseEntity<?> handleResourceNotFoundException(ResourceNotFoundException resourceNotFoundException, WebRequest webRequest) {
-        ErrorDetails errorDetails = new ErrorDetails(new Date(), resourceNotFoundException.getMessage(), webRequest.getDescription(false));
-        return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND);
+    public ResponseEntity<?> handleResourceNotFoundException(ResourceNotFoundException exception, WebRequest webRequest) {
+        return handleException(exception, webRequest, HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(CustomCrudException.class)
-    public ResponseEntity<?> handleCustomCrudException(CustomCrudException customCrudException, WebRequest webRequest) {
-        ErrorDetails errorDetails = new ErrorDetails(new Date(), customCrudException.getMessage(), webRequest.getDescription(false));
-        return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);
+    public ResponseEntity<?> handleCustomCrudException(CustomCrudException exception, WebRequest webRequest) {
+        return handleException(exception, webRequest, HttpStatus.BAD_REQUEST);
     }
 
-    @ExceptionHandler(HttpMessageConversionException.class)
-    public ResponseEntity<?> handleHttpMessageConversionException(HttpMessageConversionException httpMessageConversionException, WebRequest webRequest) {
-        ErrorDetails errorDetails = new ErrorDetails(new Date(), httpMessageConversionException.getMessage(), webRequest.getDescription(false));
-        return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);
+    @ExceptionHandler({
+            HttpMessageConversionException.class,
+            TypeMismatchException.class
+    })
+    public ResponseEntity<?> handleDataConversionException(Exception exception, WebRequest webRequest) {
+        return handleException(exception, webRequest, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<?> handleGlobalException(Exception exception, WebRequest webRequest) {
-        ErrorDetails errorDetails = new ErrorDetails(new Date(), exception.getMessage(), webRequest.getDescription(false));
-        return new ResponseEntity<>(errorDetails, HttpStatus.INTERNAL_SERVER_ERROR);
+        return handleException(exception, webRequest, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    private ResponseEntity<?> handleException(Exception exception, WebRequest webRequest, HttpStatus httpStatus) {
+        String message = exception.getMessage();
+        logger.error(message);
+
+        return new ResponseEntity<>(new ErrorDetails(new Date(), message, webRequest.getDescription(false)), httpStatus);
     }
 }

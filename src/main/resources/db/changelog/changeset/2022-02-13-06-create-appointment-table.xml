@@ -31,7 +31,7 @@
                 <tableExists tableName="appointment"/>
             </not>
             <tableExists tableName="doctor_schedule"/>
-            <tableExists tableName="user"/>
+            <tableExists tableName="account"/>
         </preConditions>
 
         <createTable tableName="appointment">
@@ -47,8 +47,8 @@
                 <constraints foreignKeyName="fk_appointment_doctor_schedule" references="doctor_schedule(id)" nullable="false"/>
             </column>
 
-            <column name="user_id" type="BIGINT">
-                <constraints foreignKeyName="fk_appointment_user" references="user(id)" nullable="false"/>
+            <column name="account_id" type="BIGINT">
+                <constraints foreignKeyName="fk_appointment_account" references="account(id)" nullable="false"/>
             </column>
         </createTable>
     </changeSet>
