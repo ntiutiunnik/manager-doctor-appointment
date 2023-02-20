@@ -11,6 +11,8 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 public interface AppointmentRepository extends CustomTransactionalRepository<Appointment, Long>, JpaSpecificationExecutor<Appointment>, NativeQueryRepository {
@@ -33,4 +35,12 @@ public interface AppointmentRepository extends CustomTransactionalRepository<App
     })
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     Optional<Appointment> findById(Long id);
+
+    @EntityGraph(attributePaths = {
+            "doctorSchedule",
+            "account",
+            "doctorSchedule.doctor",
+            "doctorSchedule.timeSlot"
+    })
+    List<Appointment> findAllByDoctorScheduleTimeSlotStartTimeBetween(LocalDateTime start, LocalDateTime end);
 }

@@ -3,6 +3,7 @@ package com.demo.manager.doctorappointment.service.impl;
 import com.demo.manager.doctorappointment.dto.impl.AppointmentDto;
 import com.demo.manager.doctorappointment.exception.CustomCrudException;
 import com.demo.manager.doctorappointment.mapper.impl.AppointmentMapper;
+import com.demo.manager.doctorappointment.messaging.AppointmentHistoryPublisher;
 import com.demo.manager.doctorappointment.model.impl.Appointment;
 import com.demo.manager.doctorappointment.repository.impl.AppointmentRepository;
 import com.demo.manager.doctorappointment.service.AbstractService;
@@ -15,23 +16,47 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
 public class AppointmentService extends AbstractService<Appointment, Long, AppointmentDto, AppointmentMapper, AppointmentRepository> {
     private static final Logger logger = LogManager.getLogger(AppointmentService.class);
 
+    private final AppointmentHistoryPublisher appointmentHistoryPublisher;
+
     public AppointmentService(AppointmentMapper appointmentMapper,
-                              AppointmentRepository appointmentRepository) {
+                              AppointmentRepository appointmentRepository,
+                              AppointmentHistoryPublisher appointmentHistoryPublisher) {
         super(appointmentMapper, appointmentRepository);
+        this.appointmentHistoryPublisher = appointmentHistoryPublisher;
+    }
+
+    @Scheduled(cron = "0 0 23 * * *")
+    public void sendAppointmentHistory() {
+        LocalDate now = LocalDate.now();
+        logger.info("Going to send appointment history for {}.", now);
+
+        try {
+            List<Appointment> appointments = repository.findAllByDoctorScheduleTimeSlotStartTimeBetween(now.atStartOfDay(), now.atStartOfDay().plusDays(1L));
+
+            appointmentHistoryPublisher.sendAppointmentHistory(mapper.entitiesToDtos(appointments));
+            logger.info("Appointment history sent successfully.");
+        } catch (Exception e) {
+            logger.error("An exception occurred while sending appointment history: {}.", e.getMessage());
+        }
     }
 
     @Scheduled(cron = "0 0 0 * * *")
     public void restartNumberSequence() {
         logger.info("Going to restart appointment number sequence.");
 
-        restartAppointmentNumberSequence();
-        logger.info("Appointment number sequence restarted successfully.");
+        try {
+            restartAppointmentNumberSequence();
+            logger.info("Appointment number sequence restarted successfully.");
+        } catch (Exception e) {
+            logger.error("An exception occurred while restarting appointment number sequence: {}.", e.getMessage());
+        }
     }
 
     public List<AppointmentDto> findAllAppointments(AppointmentFilterParam appointmentFilterParam, PageRequest pageRequest) {

@@ -17,7 +17,7 @@ import java.util.Date;
 
 @RestControllerAdvice
 public class ControllerAdvice {
-    private final static Logger logger = LogManager.getLogger(ControllerAdvice.class);
+    private static final Logger logger = LogManager.getLogger(ControllerAdvice.class);
 
     @ExceptionHandler(ResourceNotFoundException.class)
     public ResponseEntity<?> handleResourceNotFoundException(ResourceNotFoundException exception, WebRequest webRequest) {

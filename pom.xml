@@ -61,6 +61,12 @@
             <version>1.5.3.Final</version>
         </dependency>
 
+        <!--Messaging dependencies-->
+        <dependency>
+            <groupId>org.springframework.kafka</groupId>
+            <artifactId>spring-kafka</artifactId>
+        </dependency>
+
         <!--Logging dependencies-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
