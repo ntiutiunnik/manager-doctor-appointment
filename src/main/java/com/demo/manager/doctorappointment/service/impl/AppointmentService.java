@@ -17,6 +17,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -32,14 +33,13 @@ public class AppointmentService extends AbstractService<Appointment, Long, Appoi
         this.appointmentHistoryPublisher = appointmentHistoryPublisher;
     }
 
-    @Scheduled(cron = "0 0 23 * * *")
+    @Scheduled(cron = "0 30 23 * * *")
     public void sendAppointmentHistory() {
         LocalDate now = LocalDate.now();
         logger.info("Going to send appointment history for {}.", now);
 
         try {
-            List<Appointment> appointments = repository.findAllByDoctorScheduleTimeSlotStartTimeBetween(now.atStartOfDay(), now.atStartOfDay().plusDays(1L));
-
+            List<Appointment> appointments = repository.findAllByDoctorScheduleTimeSlotStartTimeBetween(now.atStartOfDay(), getEndTimeSlot(now));
             appointmentHistoryPublisher.sendAppointmentHistory(mapper.entitiesToDtos(appointments));
             logger.info("Appointment history sent successfully.");
         } catch (Exception e) {
@@ -69,6 +69,10 @@ public class AppointmentService extends AbstractService<Appointment, Long, Appoi
         if (appointmentDto.getNumber() != null) {
             throw new CustomCrudException("Number of appointment should be auto-generated.");
         }
+    }
+
+    private LocalDateTime getEndTimeSlot(LocalDate localDate) {
+        return localDate.atStartOfDay().plusDays(1L).minusMinutes(1L);
     }
 
     private void restartAppointmentNumberSequence() {

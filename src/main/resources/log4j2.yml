@@ -1,5 +1,4 @@
 Configuration:
-  #  name: Production
 
   Properties:
     Property:
@@ -148,3 +147,8 @@ Configuration:
           - ref: FrameworkLogAppender
 
       # Events audit logging bindings
+      - name: org.apache.kafka
+        additivity: false
+        level: info
+        AppenderRef:
+          - ref: EventsAuditLogAppender
