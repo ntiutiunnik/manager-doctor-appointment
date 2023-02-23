@@ -1,10 +1,10 @@
 package com.demo.manager.doctorappointment.model.impl;
 
 import com.demo.manager.doctorappointment.model.BasicEntity;
-import jakarta.persistence.*;
 import org.hibernate.annotations.Generated;
 import org.hibernate.annotations.GenerationTime;
 
+import javax.persistence.*;
 import java.util.Objects;
 
 @Entity

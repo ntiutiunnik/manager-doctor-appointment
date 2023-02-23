@@ -2,9 +2,9 @@ package com.demo.manager.doctorappointment.specification;
 
 import com.demo.manager.doctorappointment.model.impl.Doctor;
 import com.demo.manager.doctorappointment.specification.filter.DoctorFilterParam;
-import jakarta.persistence.criteria.Predicate;
 import org.springframework.data.jpa.domain.Specification;
 
+import javax.persistence.criteria.Predicate;
 import java.util.ArrayList;
 import java.util.List;
 

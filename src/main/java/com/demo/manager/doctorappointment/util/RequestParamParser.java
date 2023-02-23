@@ -1,7 +1,8 @@
 package com.demo.manager.doctorappointment.util;
 
-import jakarta.servlet.http.HttpServletRequest;
 import org.apache.commons.lang3.StringUtils;
+
+import javax.servlet.http.HttpServletRequest;
 
 public class RequestParamParser {
 

@@ -1,7 +1,8 @@
 package com.demo.manager.doctorappointment.specification.filter;
 
 import com.demo.manager.doctorappointment.util.RequestParamParser;
-import jakarta.servlet.http.HttpServletRequest;
+
+import javax.servlet.http.HttpServletRequest;
 
 public class DoctorFilterParam {
     private Long departmentId;

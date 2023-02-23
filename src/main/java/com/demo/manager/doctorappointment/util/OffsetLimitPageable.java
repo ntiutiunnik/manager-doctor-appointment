@@ -1,10 +1,11 @@
 package com.demo.manager.doctorappointment.util;
 
 import com.demo.manager.doctorappointment.util.resource.RestParams;
-import jakarta.servlet.http.HttpServletRequest;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+
+import javax.servlet.http.HttpServletRequest;
 
 public class OffsetLimitPageable extends PageRequest {
 

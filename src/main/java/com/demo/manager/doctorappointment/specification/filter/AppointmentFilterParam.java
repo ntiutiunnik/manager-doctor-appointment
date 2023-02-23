@@ -1,6 +1,7 @@
 package com.demo.manager.doctorappointment.specification.filter;
 
-import jakarta.servlet.http.HttpServletRequest;
+
+import javax.servlet.http.HttpServletRequest;
 
 import static com.demo.manager.doctorappointment.util.RequestParamParser.getLongValue;
 

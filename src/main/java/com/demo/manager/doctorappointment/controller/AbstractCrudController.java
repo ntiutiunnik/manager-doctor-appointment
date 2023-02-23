@@ -6,11 +6,11 @@ import com.demo.manager.doctorappointment.model.BasicEntity;
 import com.demo.manager.doctorappointment.repository.CustomTransactionalRepository;
 import com.demo.manager.doctorappointment.service.AbstractService;
 import com.demo.manager.doctorappointment.util.OffsetLimitPageable;
-import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 import static com.demo.manager.doctorappointment.util.resource.RestParams.ID_PATH_PARAM;

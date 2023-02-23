@@ -1,8 +1,8 @@
 package com.demo.manager.doctorappointment.model.impl;
 
 import com.demo.manager.doctorappointment.model.BasicEntity;
-import jakarta.persistence.*;
 
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
