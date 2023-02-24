@@ -9,6 +9,10 @@ import com.demo.manager.doctorappointment.service.impl.DoctorService;
 import com.demo.manager.doctorappointment.specification.filter.DoctorFilterParam;
 import com.demo.manager.doctorappointment.util.OffsetLimitPageable;
 import com.demo.manager.doctorappointment.util.resource.GeneralResource;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.Parameters;
+import io.swagger.v3.oas.annotations.enums.ParameterIn;
+import io.swagger.v3.oas.annotations.media.Schema;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,6 +32,13 @@ public class DoctorController extends AbstractCrudController<Doctor, Long, Docto
 
     @Override
     @GetMapping
+    @Parameters({
+            @Parameter(
+                    name = "department_id",
+                    in = ParameterIn.QUERY,
+                    schema = @Schema(type = "integer")
+            )
+    })
     public ResponseEntity<List<DoctorDto>> findAll(HttpServletRequest httpServletRequest) {
         List<DoctorDto> doctors = service.findAllDoctors(DoctorFilterParam.of(httpServletRequest), OffsetLimitPageable.of(httpServletRequest));
         return new ResponseEntity<>(doctors, HttpStatus.OK);

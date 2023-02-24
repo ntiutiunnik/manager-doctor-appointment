@@ -1,4 +1,4 @@
-package com.demo.manager.doctorappointment.config.config;
+package com.demo.manager.doctorappointment.config;
 
 import com.demo.manager.doctorappointment.util.resource.GeneralResource;
 import org.springframework.boot.context.event.ApplicationPreparedEvent;

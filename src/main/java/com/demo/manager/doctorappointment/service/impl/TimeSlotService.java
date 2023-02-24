@@ -27,5 +27,9 @@ public class TimeSlotService extends AbstractService<TimeSlot, Long, TimeSlotDto
         if (startTime == null || endTime == null || ChronoUnit.MINUTES.between(startTime, endTime) != 30) {
             throw new CustomCrudException("Timeslot should be exactly 30 minutes long.");
         }
+
+        if (!startTime.isAfter(LocalDateTime.now())) {
+            throw new CustomCrudException("Timeslot should exceed current time.");
+        }
     }
 }

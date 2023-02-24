@@ -6,6 +6,10 @@ import com.demo.manager.doctorappointment.model.BasicEntity;
 import com.demo.manager.doctorappointment.repository.CustomTransactionalRepository;
 import com.demo.manager.doctorappointment.service.AbstractService;
 import com.demo.manager.doctorappointment.util.OffsetLimitPageable;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.Parameters;
+import io.swagger.v3.oas.annotations.enums.ParameterIn;
+import io.swagger.v3.oas.annotations.media.Schema;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -26,6 +30,18 @@ public abstract class AbstractCrudController<T extends BasicEntity<ID>, ID, DTO 
     @GetMapping(
             produces = "application/json"
     )
+    @Parameters({
+            @Parameter(
+                    name = "offset",
+                    in = ParameterIn.QUERY,
+                    schema = @Schema(type = "integer", defaultValue = "0", example = "5")
+            ),
+            @Parameter(
+                    name = "limit",
+                    in = ParameterIn.QUERY,
+                    schema = @Schema(type = "integer", defaultValue = "25", example = "25")
+            )
+    })
     public ResponseEntity<List<DTO>> findAll(HttpServletRequest httpServletRequest) {
         List<DTO> entities = service.findAll(OffsetLimitPageable.of(httpServletRequest));
         return new ResponseEntity<>(entities, HttpStatus.OK);
