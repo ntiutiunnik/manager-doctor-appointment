@@ -1,0 +1,60 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: manager-doctor-appointment
+  labels:
+    app: manager-doctor-appointment
+spec:
+  ports:
+    - port: 9001
+      targetPort: 9001
+  selector:
+    app: manager-doctor-appointment
+  type: ClusterIP
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: manager-doctor-appointment-deployment
+  labels:
+    app: manager-doctor-appointment-deployment
+spec:
+  selector:
+    matchLabels:
+      app: manager-doctor-appointment
+  template:
+    metadata:
+      labels:
+        app: manager-doctor-appointment
+    spec:
+      containers:
+        - name: manager-doctor-appointment
+          image: nikolai97/doctor-appointment-manager:v1
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 9001
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: prod
+            - name: PG_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: doctor-appointment-manager-config
+                  key: PG_HOST
+            - name: PG_DATABASE
+              valueFrom:
+                configMapKeyRef:
+                  name: postgresql-config
+                  key: POSTGRES_DB
+            - name: PG_USER
+              valueFrom:
+                secretKeyRef:
+                  name: postgresql-secret
+                  key: POSTGRES_USER
+            - name: PG_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgresql-secret
+                  key: POSTGRES_PASSWORD
+  replicas: 1

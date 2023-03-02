@@ -7,13 +7,12 @@ spring:
     username: user
     password: password
     driver-class-name: org.postgresql.Driver
+    hikari:
+      initialization-fail-timeout: 0
 
   jpa:
     hibernate:
       ddl-auto: none
-    show-sql: true
-    properties:
-      hibernate.format_sql: true
 
   liquibase:
     change-log: classpath:db/changelog/changelog-master.xml
@@ -22,14 +21,14 @@ spring:
     deserialization:
       fail-on-unknown-properties: false
 
-  kafka:
-    producer:
-      bootstrap-servers: localhost:29092
-      key-serializer: org.apache.kafka.common.serialization.StringSerializer
-      value-serializer: com.demo.manager.doctorappointment.util.serialization.kafka.CustomSerializer
-    topic:
-      name:
-        appointment_history
+#  kafka:
+#    producer:
+#      bootstrap-servers: localhost:29092
+#      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+#      value-serializer: com.demo.manager.doctorappointment.util.serialization.kafka.CustomSerializer
+#    topic:
+#      name:
+#        appointment_history
 
 eureka:
   client:

@@ -33,7 +33,7 @@ public class AppointmentService extends AbstractService<Appointment, Long, Appoi
         this.appointmentHistoryPublisher = appointmentHistoryPublisher;
     }
 
-    @Scheduled(cron = "0 30 23 * * *")
+//    @Scheduled(cron = "0 30 23 * * *")
     public void sendAppointmentHistory() {
         LocalDate now = LocalDate.now();
         logger.info("Going to send appointment history for {}.", now);
