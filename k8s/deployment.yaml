@@ -28,6 +28,11 @@ spec:
       labels:
         app: manager-doctor-appointment
     spec:
+      initContainers:
+        - name: check-pg-ready
+          image: postgres:15.1-alpine
+          command: [ 'sh', '-c',
+            'until pg_isready -h postgresql-service -p 5432; do echo waiting for database; sleep 2; done;' ]
       containers:
         - name: manager-doctor-appointment
           image: nikolai97/doctor-appointment-manager:v1

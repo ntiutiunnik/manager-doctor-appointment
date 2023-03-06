@@ -14,6 +14,21 @@ spec:
 
 ---
 apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: postgresql-volume
+  labels:
+    type: local
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/data/postgresql"
+
+---
+apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: postgresql-pv-claim
