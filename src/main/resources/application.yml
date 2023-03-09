@@ -19,14 +19,14 @@ spring:
     deserialization:
       fail-on-unknown-properties: false
 
-#  kafka:
-#    producer:
-#      bootstrap-servers: localhost:29092
-#      key-serializer: org.apache.kafka.common.serialization.StringSerializer
-#      value-serializer: com.demo.manager.doctorappointment.util.serialization.kafka.CustomSerializer
-#    topic:
-#      name:
-#        appointment_history
+  kafka:
+    producer:
+      bootstrap-servers: localhost:29092
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: com.demo.manager.doctorappointment.util.serialization.kafka.CustomSerializer
+    topic:
+      name:
+        appointment_history
 
 eureka:
   client:

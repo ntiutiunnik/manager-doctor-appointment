@@ -4,6 +4,17 @@ spring:
     username: '${PG_USER}'
     password: '${PG_PASSWORD}'
 
+  kafka:
+    producer:
+      bootstrap-servers: '${KAFKA_SERVERS}'
+    properties:
+      security:
+        protocol: SASL_SSL
+      sasl:
+        mechanism: PLAIN
+        jaas:
+          config: 'org.apache.kafka.common.security.plain.PlainLoginModule required username="token" password="${KAFKA_API_KEY}";'
+
 eureka:
   instance:
     preferIpAddress: true

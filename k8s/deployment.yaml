@@ -45,7 +45,7 @@ spec:
             - name: PG_HOST
               valueFrom:
                 configMapKeyRef:
-                  name: doctor-appointment-manager-config
+                  name: manager-doctor-appointment-config
                   key: PG_HOST
             - name: PG_DATABASE
               valueFrom:
@@ -62,4 +62,14 @@ spec:
                 secretKeyRef:
                   name: postgresql-secret
                   key: POSTGRES_PASSWORD
+            - name: KAFKA_SERVERS
+              valueFrom:
+                configMapKeyRef:
+                  name: manager-doctor-appointment-config
+                  key: KAFKA_SERVERS
+            - name: KAFKA_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: manager-doctor-appointment-secret
+                  key: KAFKA_API_KEY
   replicas: 1
