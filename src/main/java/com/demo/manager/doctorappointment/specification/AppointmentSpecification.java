@@ -9,6 +9,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AppointmentSpecification {
+
+    private AppointmentSpecification() {
+        `throw new IllegalStateException("Utility class");`
+    }
+
     public static Specification<Appointment> getFilteredAppointments(AppointmentFilterParam params) {
         return (root, criteriaQuery, criteriaBuilder) -> {
             List<Predicate> predicates = new ArrayList<>();

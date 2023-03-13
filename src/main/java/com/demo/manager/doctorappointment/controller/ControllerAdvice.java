@@ -21,12 +21,12 @@ public class ControllerAdvice {
     private static final Logger logger = LogManager.getLogger(ControllerAdvice.class);
 
     @ExceptionHandler(ResourceNotFoundException.class)
-    public ResponseEntity<?> handleResourceNotFoundException(ResourceNotFoundException exception, WebRequest webRequest) {
+    public ResponseEntity<ErrorDetails> handleResourceNotFoundException(ResourceNotFoundException exception, WebRequest webRequest) {
         return handleException(exception, webRequest, HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(CustomCrudException.class)
-    public ResponseEntity<?> handleCustomCrudException(CustomCrudException exception, WebRequest webRequest) {
+    public ResponseEntity<ErrorDetails> handleCustomCrudException(CustomCrudException exception, WebRequest webRequest) {
         return handleException(exception, webRequest, HttpStatus.BAD_REQUEST);
     }
 
@@ -35,16 +35,16 @@ public class ControllerAdvice {
             TypeMismatchException.class,
             ConversionFailedException.class
     })
-    public ResponseEntity<?> handleDataConversionException(Exception exception, WebRequest webRequest) {
+    public ResponseEntity<ErrorDetails> handleDataConversionException(Exception exception, WebRequest webRequest) {
         return handleException(exception, webRequest, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<?> handleGlobalException(Exception exception, WebRequest webRequest) {
+    public ResponseEntity<ErrorDetails> handleGlobalException(Exception exception, WebRequest webRequest) {
         return handleException(exception, webRequest, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-    private ResponseEntity<?> handleException(Exception exception, WebRequest webRequest, HttpStatus httpStatus) {
+    private ResponseEntity<ErrorDetails> handleException(Exception exception, WebRequest webRequest, HttpStatus httpStatus) {
         String message = exception.getMessage();
         logger.error(message);
 

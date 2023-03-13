@@ -1,6 +1,9 @@
 package com.demo.manager.doctorappointment.util.resource;
 
-public interface GeneralResource {
+public final class GeneralResource {
 
-    String PATH = "/api/manage";
+    private GeneralResource() {
+    }
+
+    public static final String PATH = "/api/manage";
 }

@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
-public class Account implements BasicEntity<Long> {
+public class Account implements BasicEntity<Account, Long> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "account_id_generator")
@@ -39,6 +39,12 @@ public class Account implements BasicEntity<Long> {
         return Objects.hash(id);
     }
 
+    @Override
+    public Class<? extends Account> getEntityClass() {
+        return getClass();
+    }
+
+    @Override
     public Long getId() {
         return id;
     }

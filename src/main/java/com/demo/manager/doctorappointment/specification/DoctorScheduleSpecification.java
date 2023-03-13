@@ -9,6 +9,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DoctorScheduleSpecification {
+
+    private DoctorScheduleSpecification() {
+        throw new IllegalStateException("Utility class");
+    }
+
     public static Specification<DoctorSchedule> getFilteredDoctorSchedules(DoctorScheduleFilterParam params) {
         return (root, criteriaQuery, criteriaBuilder) -> {
             List<Predicate> predicates = new ArrayList<>();

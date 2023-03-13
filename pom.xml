@@ -92,6 +92,12 @@
             <version>1.5.3.Final</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.github.java-json-tools</groupId>
+            <artifactId>json-patch</artifactId>
+            <version>1.12</version>
+        </dependency>
+
         <!--Messaging dependencies-->
         <dependency>
             <groupId>org.springframework.kafka</groupId>

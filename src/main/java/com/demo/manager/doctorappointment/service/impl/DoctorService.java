@@ -7,6 +7,7 @@ import com.demo.manager.doctorappointment.repository.impl.DoctorRepository;
 import com.demo.manager.doctorappointment.service.AbstractService;
 import com.demo.manager.doctorappointment.specification.DoctorSpecification;
 import com.demo.manager.doctorappointment.specification.filter.DoctorFilterParam;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -17,8 +18,9 @@ import java.util.List;
 public class DoctorService extends AbstractService<Doctor, Long, DoctorDto, DoctorMapper, DoctorRepository> {
 
     public DoctorService(DoctorMapper doctorMapper,
-                         DoctorRepository doctorRepository) {
-        super(doctorMapper, doctorRepository);
+                         DoctorRepository doctorRepository,
+                         ObjectMapper objectMapper) {
+        super(doctorMapper, doctorRepository, objectMapper);
     }
 
     public List<DoctorDto> findAllDoctors(DoctorFilterParam doctorFilterParam, PageRequest pageRequest) {

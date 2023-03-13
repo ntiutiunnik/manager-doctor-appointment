@@ -9,6 +9,7 @@ import com.demo.manager.doctorappointment.repository.impl.AppointmentRepository;
 import com.demo.manager.doctorappointment.service.AbstractService;
 import com.demo.manager.doctorappointment.specification.AppointmentSpecification;
 import com.demo.manager.doctorappointment.specification.filter.AppointmentFilterParam;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.data.domain.Page;
@@ -28,8 +29,9 @@ public class AppointmentService extends AbstractService<Appointment, Long, Appoi
 
     public AppointmentService(AppointmentMapper appointmentMapper,
                               AppointmentRepository appointmentRepository,
+                              ObjectMapper objectMapper,
                               AppointmentHistoryPublisher appointmentHistoryPublisher) {
-        super(appointmentMapper, appointmentRepository);
+        super(appointmentMapper, appointmentRepository, objectMapper);
         this.appointmentHistoryPublisher = appointmentHistoryPublisher;
     }
 

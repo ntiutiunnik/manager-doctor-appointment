@@ -8,7 +8,7 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-public class Appointment implements BasicEntity<Long> {
+public class Appointment implements BasicEntity<Appointment, Long> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "appointment_id_generator")
@@ -39,6 +39,12 @@ public class Appointment implements BasicEntity<Long> {
         return Objects.hash(id);
     }
 
+    @Override
+    public Class<? extends Appointment> getEntityClass() {
+        return getClass();
+    }
+
+    @Override
     public Long getId() {
         return id;
     }

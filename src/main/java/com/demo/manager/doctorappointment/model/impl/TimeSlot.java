@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
-public class TimeSlot implements BasicEntity<Long> {
+public class TimeSlot implements BasicEntity<TimeSlot, Long> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "time_slot_id_generator")
@@ -36,12 +36,18 @@ public class TimeSlot implements BasicEntity<Long> {
         return Objects.hash(id);
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    @Override
+    public Class<? extends TimeSlot> getEntityClass() {
+        return getClass();
     }
 
+    @Override
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public LocalDateTime getStartTime() {

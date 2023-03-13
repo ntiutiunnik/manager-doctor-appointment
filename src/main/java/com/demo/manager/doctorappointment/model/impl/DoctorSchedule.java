@@ -6,7 +6,7 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-public class DoctorSchedule implements BasicEntity<Long> {
+public class DoctorSchedule implements BasicEntity<DoctorSchedule, Long> {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "doctor_schedule_id_generator")
     @SequenceGenerator(name = "doctor_schedule_id_generator", sequenceName = "doctor_schedule_id_seq", allocationSize = 1)
@@ -36,12 +36,18 @@ public class DoctorSchedule implements BasicEntity<Long> {
         return Objects.hash(id);
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    @Override
+    public Class<? extends DoctorSchedule> getEntityClass() {
+        return getClass();
     }
 
+    @Override
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Appointment getAppointment() {

@@ -6,6 +6,7 @@ import com.demo.manager.doctorappointment.mapper.impl.AccountMapper;
 import com.demo.manager.doctorappointment.model.impl.Account;
 import com.demo.manager.doctorappointment.repository.impl.AccountRepository;
 import com.demo.manager.doctorappointment.service.AbstractService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
 
@@ -15,8 +16,9 @@ public class AccountService extends AbstractService<Account, Long, AccountDto, A
     private static final int MINIMUM_LENGTH = 5;
 
     public AccountService(AccountMapper accountMapper,
-                          AccountRepository accountRepository) {
-        super(accountMapper, accountRepository);
+                          AccountRepository accountRepository,
+                          ObjectMapper objectMapper) {
+        super(accountMapper, accountRepository, objectMapper);
     }
 
     @Override

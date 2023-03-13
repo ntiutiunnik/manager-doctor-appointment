@@ -1,14 +1,20 @@
 package com.demo.manager.doctorappointment.model.impl;
 
 import com.demo.manager.doctorappointment.model.BasicEntity;
-import javax.persistence.*;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 @Entity
-public class Department implements BasicEntity<Long> {
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id"
+)
+public class Department implements BasicEntity<Department, Long> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "department_id_generator")
@@ -37,6 +43,12 @@ public class Department implements BasicEntity<Long> {
         this.id = id;
     }
 
+    @Override
+    public Class<? extends Department> getEntityClass() {
+        return getClass();
+    }
+
+    @Override
     public Long getId() {
         return id;
     }

@@ -6,6 +6,7 @@ import com.demo.manager.doctorappointment.model.BasicEntity;
 import com.demo.manager.doctorappointment.repository.CustomTransactionalRepository;
 import com.demo.manager.doctorappointment.service.AbstractService;
 import com.demo.manager.doctorappointment.util.OffsetLimitPageable;
+import com.github.fge.jsonpatch.JsonPatch;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.Parameters;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
@@ -19,7 +20,7 @@ import java.util.List;
 
 import static com.demo.manager.doctorappointment.util.resource.RestParams.ID_PATH_PARAM;
 
-public abstract class AbstractCrudController<T extends BasicEntity<ID>, ID, DTO extends BasicDto<ID>, S extends AbstractService<T, ID, DTO, M, R>, M extends AbstractMapper<T, DTO>, R extends CustomTransactionalRepository<T, ID>> {
+public abstract class AbstractCrudController<T extends BasicEntity<T, ID>, ID, DTO extends BasicDto<ID>, S extends AbstractService<T, ID, DTO, M, R>, M extends AbstractMapper<T, DTO>, R extends CustomTransactionalRepository<T, ID>> {
 
     protected final S service;
 
@@ -61,6 +62,16 @@ public abstract class AbstractCrudController<T extends BasicEntity<ID>, ID, DTO 
     )
     public ResponseEntity<DTO> save(@RequestBody DTO dto) {
         DTO resultDto = service.save(dto);
+        return new ResponseEntity<>(resultDto, HttpStatus.OK);
+    }
+
+    @PatchMapping(
+            path = ID_PATH_PARAM,
+            consumes = "application/json-patch+json",
+            produces = "application/json"
+    )
+    public ResponseEntity<DTO> update(@PathVariable ID id, @RequestBody JsonPatch patch) {
+        DTO resultDto = service.update(id, patch);
         return new ResponseEntity<>(resultDto, HttpStatus.OK);
     }
 

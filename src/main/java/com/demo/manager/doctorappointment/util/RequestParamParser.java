@@ -6,6 +6,10 @@ import javax.servlet.http.HttpServletRequest;
 
 public class RequestParamParser {
 
+    private RequestParamParser() {
+        throw new IllegalStateException("Utility class");
+    }
+
     public static Long getLongValue(HttpServletRequest httpServletRequest, String paramName) {
         if (httpServletRequest == null || StringUtils.isEmpty(paramName)) {
             return null;
