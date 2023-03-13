@@ -31,8 +31,8 @@ public abstract class AbstractService<T extends BasicEntity<ID>, ID, DTO extends
 
     public DTO findById(ID id) {
         Optional<T> optionalT = repository.findById(id);
-        return optionalT.map(mapper::entityToDto).
-                orElseThrow(() -> new ResourceNotFoundException("Entity not found."));
+        return optionalT.map(mapper::entityToDto)
+                .orElseThrow(() -> new ResourceNotFoundException("Entity not found."));
     }
 
     @Transactional
