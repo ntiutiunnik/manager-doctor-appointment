@@ -1,18 +1,17 @@
 package com.demo.manager.doctorappointment.repository.impl;
 
 import com.demo.manager.doctorappointment.model.impl.Doctor;
-import com.demo.manager.doctorappointment.repository.CustomTransactionalRepository;
+import com.demo.manager.doctorappointment.repository.CustomTransactionalSpecificationRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.EntityGraph;
-import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
-public interface DoctorRepository extends CustomTransactionalRepository<Doctor, Long>, JpaSpecificationExecutor<Doctor> {
+public interface DoctorRepository extends CustomTransactionalSpecificationRepository<Doctor, Long> {
 
     @Override
     @EntityGraph(attributePaths = {

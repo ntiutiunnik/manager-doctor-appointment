@@ -1,49 +1,63 @@
-package com.demo.manager.doctorappointment.service;
+package com.demo.manager.doctorappointment.service.impl;
 
 import com.demo.manager.doctorappointment.dto.BasicDto;
 import com.demo.manager.doctorappointment.exception.CustomCrudException;
 import com.demo.manager.doctorappointment.exception.ResourceNotFoundException;
 import com.demo.manager.doctorappointment.mapper.AbstractMapper;
 import com.demo.manager.doctorappointment.model.BasicEntity;
-import com.demo.manager.doctorappointment.repository.CustomTransactionalRepository;
-import com.demo.manager.doctorappointment.util.OffsetLimitPageable;
+import com.demo.manager.doctorappointment.repository.CustomTransactionalSpecificationRepository;
+import com.demo.manager.doctorappointment.service.PagingAndFilteringCrudService;
+import com.demo.manager.doctorappointment.specification.SpecificationUtils;
+import com.demo.manager.doctorappointment.specification.filter.FilterParam;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.fge.jsonpatch.JsonPatch;
 import com.github.fge.jsonpatch.JsonPatchException;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
 
-public abstract class AbstractService<T extends BasicEntity<T, ID>, ID, DTO extends BasicDto<ID>, M extends AbstractMapper<T, DTO>, R extends CustomTransactionalRepository<T, ID>> {
+public class PagingAndFilteringCrudServiceImpl<DTO extends BasicDto<ID>, ID, T extends BasicEntity<T, ID>, F extends FilterParam, M extends AbstractMapper<T, DTO>, R extends CustomTransactionalSpecificationRepository<T, ID>>
+        implements PagingAndFilteringCrudService<DTO, ID, F> {
 
     protected final M mapper;
 
     protected final R repository;
 
+    protected final SpecificationUtils<T, F> specificationUtils;
+
     protected final ObjectMapper objectMapper;
 
-    protected AbstractService(M mapper,
-                              R repository,
-                              ObjectMapper objectMapper) {
+    public PagingAndFilteringCrudServiceImpl(M mapper,
+                                             R repository,
+                                             SpecificationUtils<T, F> specificationUtils,
+                                             ObjectMapper objectMapper) {
         this.mapper = mapper;
         this.repository = repository;
+        this.specificationUtils = specificationUtils;
         this.objectMapper = objectMapper;
     }
 
-    public List<DTO> findAll(OffsetLimitPageable offsetLimitPageable) {
-        Page<T> page = repository.findAll(offsetLimitPageable);
+    @Override
+    public List<DTO> findAll(Pageable pageable, F filterParam) {
+        Specification<T> specification = specificationUtils.createSpecification(filterParam);
+        Page<T> page = repository.findAll(specification, pageable);
+
         return mapper.entitiesToDtos(page.getContent());
     }
 
+    @Override
     public DTO findById(ID id) {
         T entity = retrieveById(id);
         return mapper.entityToDto(entity);
     }
 
+    @Override
     @Transactional
     public DTO save(DTO dto) {
         if (dto.getId() != null) {
@@ -57,6 +71,7 @@ public abstract class AbstractService<T extends BasicEntity<T, ID>, ID, DTO exte
         return findById(entity.getId());
     }
 
+    @Override
     @Transactional
     public DTO update(ID id, JsonPatch patch) {
         T entity = retrieveById(id);
@@ -65,6 +80,7 @@ public abstract class AbstractService<T extends BasicEntity<T, ID>, ID, DTO exte
         return findById(entity.getId());
     }
 
+    @Override
     @Transactional
     public void deleteById(ID id) {
         retrieveById(id);

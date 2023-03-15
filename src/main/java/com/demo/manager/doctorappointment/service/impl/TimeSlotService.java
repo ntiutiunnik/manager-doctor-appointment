@@ -5,7 +5,6 @@ import com.demo.manager.doctorappointment.exception.CustomCrudException;
 import com.demo.manager.doctorappointment.mapper.impl.TimeSlotMapper;
 import com.demo.manager.doctorappointment.model.impl.TimeSlot;
 import com.demo.manager.doctorappointment.repository.impl.TimeSlotRepository;
-import com.demo.manager.doctorappointment.service.AbstractService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +12,7 @@ import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 
 @Service
-public class TimeSlotService extends AbstractService<TimeSlot, Long, TimeSlotDto, TimeSlotMapper, TimeSlotRepository> {
+public class TimeSlotService extends PagingCrudServiceImpl<TimeSlotDto, Long, TimeSlot, TimeSlotMapper, TimeSlotRepository> {
 
     public TimeSlotService(TimeSlotMapper timeSlotMapper,
                            TimeSlotRepository timeSlotRepository,

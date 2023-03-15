@@ -5,13 +5,12 @@ import com.demo.manager.doctorappointment.exception.CustomCrudException;
 import com.demo.manager.doctorappointment.mapper.impl.AccountMapper;
 import com.demo.manager.doctorappointment.model.impl.Account;
 import com.demo.manager.doctorappointment.repository.impl.AccountRepository;
-import com.demo.manager.doctorappointment.service.AbstractService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
 
 @Service
-public class AccountService extends AbstractService<Account, Long, AccountDto, AccountMapper, AccountRepository> {
+public class AccountService extends PagingCrudServiceImpl<AccountDto, Long, Account, AccountMapper, AccountRepository> {
 
     private static final int MINIMUM_LENGTH = 5;
 

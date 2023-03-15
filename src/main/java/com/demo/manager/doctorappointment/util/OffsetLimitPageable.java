@@ -1,11 +1,10 @@
 package com.demo.manager.doctorappointment.util;
 
-import com.demo.manager.doctorappointment.util.resource.RestParams;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 
-import javax.servlet.http.HttpServletRequest;
+import static com.demo.manager.doctorappointment.util.resource.RestParams.LIMIT_VALUE;
+import static com.demo.manager.doctorappointment.util.resource.RestParams.OFFSET_VALUE;
 
 public class OffsetLimitPageable extends PageRequest {
 
@@ -16,20 +15,14 @@ public class OffsetLimitPageable extends PageRequest {
         this.offset = offset;
     }
 
-    public static OffsetLimitPageable of(HttpServletRequest httpServletRequest) {
-        String offsetString = httpServletRequest.getParameter(RestParams.OFFSET_PARAM);
-        String limitString = httpServletRequest.getParameter(RestParams.LIMIT_PARAM);
-
-        if (StringUtils.isEmpty(offsetString)) {
-            offsetString = RestParams.OFFSET_VALUE;
+    public static OffsetLimitPageable of(Integer offset, Integer limit) {
+        if (offset == null) {
+            offset = OFFSET_VALUE;
         }
 
-        if (StringUtils.isEmpty(limitString)) {
-            limitString = RestParams.LIMIT_VALUE;
+        if (limit == null) {
+            limit = LIMIT_VALUE;
         }
-
-        int offset = Integer.parseInt(offsetString);
-        int limit = Integer.parseInt(limitString);
 
         if (offset < 0 || limit < 0) {
             throw new IllegalArgumentException("Wrong pagination params provided");

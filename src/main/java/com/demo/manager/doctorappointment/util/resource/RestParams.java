@@ -8,7 +8,7 @@ public final class RestParams {
 
     public static final String LIMIT_PARAM = "limit";
 
-    public static final String OFFSET_VALUE = "0";
+    public static final int OFFSET_VALUE = 0;
 
-    public static final String LIMIT_VALUE = "25";
+    public static final int LIMIT_VALUE = 25;
 }

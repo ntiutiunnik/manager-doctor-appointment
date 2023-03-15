@@ -1,20 +1,19 @@
-package com.demo.manager.doctorappointment.specification;
+package com.demo.manager.doctorappointment.specification.impl;
 
 import com.demo.manager.doctorappointment.model.impl.Appointment;
-import com.demo.manager.doctorappointment.specification.filter.AppointmentFilterParam;
+import com.demo.manager.doctorappointment.specification.SpecificationUtils;
+import com.demo.manager.doctorappointment.specification.filter.impl.AppointmentFilterParam;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.stereotype.Component;
 
 import javax.persistence.criteria.Predicate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AppointmentSpecification {
+@Component
+public class AppointmentSpecificationUtils implements SpecificationUtils<Appointment, AppointmentFilterParam> {
 
-    private AppointmentSpecification() {
-        `throw new IllegalStateException("Utility class");`
-    }
-
-    public static Specification<Appointment> getFilteredAppointments(AppointmentFilterParam params) {
+    public Specification<Appointment> createSpecification(AppointmentFilterParam params) {
         return (root, criteriaQuery, criteriaBuilder) -> {
             List<Predicate> predicates = new ArrayList<>();
 

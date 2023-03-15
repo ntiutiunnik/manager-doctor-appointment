@@ -1,20 +1,19 @@
-package com.demo.manager.doctorappointment.specification;
+package com.demo.manager.doctorappointment.specification.impl;
 
 import com.demo.manager.doctorappointment.model.impl.DoctorSchedule;
-import com.demo.manager.doctorappointment.specification.filter.DoctorScheduleFilterParam;
+import com.demo.manager.doctorappointment.specification.SpecificationUtils;
+import com.demo.manager.doctorappointment.specification.filter.impl.DoctorScheduleFilterParam;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.stereotype.Component;
 
 import javax.persistence.criteria.Predicate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DoctorScheduleSpecification {
+@Component
+public class DoctorScheduleSpecificationUtils implements SpecificationUtils<DoctorSchedule, DoctorScheduleFilterParam> {
 
-    private DoctorScheduleSpecification() {
-        throw new IllegalStateException("Utility class");
-    }
-
-    public static Specification<DoctorSchedule> getFilteredDoctorSchedules(DoctorScheduleFilterParam params) {
+    public Specification<DoctorSchedule> createSpecification(DoctorScheduleFilterParam params) {
         return (root, criteriaQuery, criteriaBuilder) -> {
             List<Predicate> predicates = new ArrayList<>();
 

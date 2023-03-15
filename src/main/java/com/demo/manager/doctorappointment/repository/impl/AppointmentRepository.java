@@ -1,13 +1,12 @@
 package com.demo.manager.doctorappointment.repository.impl;
 
 import com.demo.manager.doctorappointment.model.impl.Appointment;
-import com.demo.manager.doctorappointment.repository.CustomTransactionalRepository;
+import com.demo.manager.doctorappointment.repository.CustomTransactionalSpecificationRepository;
 import com.demo.manager.doctorappointment.repository.NativeQueryRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.EntityGraph;
-import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,7 +14,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
-public interface AppointmentRepository extends CustomTransactionalRepository<Appointment, Long>, JpaSpecificationExecutor<Appointment>, NativeQueryRepository {
+public interface AppointmentRepository extends CustomTransactionalSpecificationRepository<Appointment, Long>,  NativeQueryRepository {
 
     @Override
     @EntityGraph(attributePaths = {

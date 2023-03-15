@@ -6,14 +6,11 @@ import com.demo.manager.doctorappointment.mapper.impl.AppointmentMapper;
 import com.demo.manager.doctorappointment.messaging.AppointmentHistoryPublisher;
 import com.demo.manager.doctorappointment.model.impl.Appointment;
 import com.demo.manager.doctorappointment.repository.impl.AppointmentRepository;
-import com.demo.manager.doctorappointment.service.AbstractService;
-import com.demo.manager.doctorappointment.specification.AppointmentSpecification;
-import com.demo.manager.doctorappointment.specification.filter.AppointmentFilterParam;
+import com.demo.manager.doctorappointment.specification.impl.AppointmentSpecificationUtils;
+import com.demo.manager.doctorappointment.specification.filter.impl.AppointmentFilterParam;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
@@ -22,16 +19,17 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
-public class AppointmentService extends AbstractService<Appointment, Long, AppointmentDto, AppointmentMapper, AppointmentRepository> {
+public class AppointmentService extends PagingAndFilteringCrudServiceImpl<AppointmentDto, Long, Appointment, AppointmentFilterParam, AppointmentMapper, AppointmentRepository> {
     private static final Logger logger = LogManager.getLogger(AppointmentService.class);
 
     private final AppointmentHistoryPublisher appointmentHistoryPublisher;
 
     public AppointmentService(AppointmentMapper appointmentMapper,
                               AppointmentRepository appointmentRepository,
+                              AppointmentSpecificationUtils appointmentSpecificationUtils,
                               ObjectMapper objectMapper,
                               AppointmentHistoryPublisher appointmentHistoryPublisher) {
-        super(appointmentMapper, appointmentRepository, objectMapper);
+        super(appointmentMapper, appointmentRepository, appointmentSpecificationUtils, objectMapper);
         this.appointmentHistoryPublisher = appointmentHistoryPublisher;
     }
 
@@ -59,11 +57,6 @@ public class AppointmentService extends AbstractService<Appointment, Long, Appoi
         } catch (Exception e) {
             logger.error("An exception occurred while restarting appointment number sequence: {}.", e.getMessage());
         }
-    }
-
-    public List<AppointmentDto> findAllAppointments(AppointmentFilterParam appointmentFilterParam, PageRequest pageRequest) {
-        Page<Appointment> appointmentPage = repository.findAll(AppointmentSpecification.getFilteredAppointments(appointmentFilterParam), pageRequest);
-        return mapper.entitiesToDtos(appointmentPage.getContent());
     }
 
     @Override
