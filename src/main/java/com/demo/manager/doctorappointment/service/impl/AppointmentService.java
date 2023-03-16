@@ -1,13 +1,13 @@
 package com.demo.manager.doctorappointment.service.impl;
 
 import com.demo.manager.doctorappointment.dto.impl.AppointmentDto;
-import com.demo.manager.doctorappointment.exception.CustomCrudException;
 import com.demo.manager.doctorappointment.mapper.impl.AppointmentMapper;
 import com.demo.manager.doctorappointment.messaging.AppointmentHistoryPublisher;
 import com.demo.manager.doctorappointment.model.impl.Appointment;
 import com.demo.manager.doctorappointment.repository.impl.AppointmentRepository;
-import com.demo.manager.doctorappointment.specification.impl.AppointmentSpecificationUtils;
 import com.demo.manager.doctorappointment.specification.filter.impl.AppointmentFilterParam;
+import com.demo.manager.doctorappointment.specification.impl.AppointmentSpecificationUtils;
+import com.demo.tools.doctorappointment.autoconfigure.exception.CustomCrudException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

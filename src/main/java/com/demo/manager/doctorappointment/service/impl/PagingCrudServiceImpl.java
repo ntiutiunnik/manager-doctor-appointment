@@ -1,12 +1,12 @@
 package com.demo.manager.doctorappointment.service.impl;
 
 import com.demo.manager.doctorappointment.dto.BasicDto;
-import com.demo.manager.doctorappointment.exception.CustomCrudException;
-import com.demo.manager.doctorappointment.exception.ResourceNotFoundException;
 import com.demo.manager.doctorappointment.mapper.AbstractMapper;
 import com.demo.manager.doctorappointment.model.BasicEntity;
 import com.demo.manager.doctorappointment.repository.CustomTransactionalRepository;
 import com.demo.manager.doctorappointment.service.PagingCrudService;
+import com.demo.tools.doctorappointment.autoconfigure.exception.CustomCrudException;
+import com.demo.tools.doctorappointment.autoconfigure.exception.ResourceNotFoundException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;

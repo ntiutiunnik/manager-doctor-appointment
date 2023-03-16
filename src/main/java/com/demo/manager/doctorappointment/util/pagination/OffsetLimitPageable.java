@@ -1,10 +1,11 @@
-package com.demo.manager.doctorappointment.util;
+package com.demo.manager.doctorappointment.util.pagination;
 
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 
-import static com.demo.manager.doctorappointment.util.resource.RestParams.LIMIT_VALUE;
-import static com.demo.manager.doctorappointment.util.resource.RestParams.OFFSET_VALUE;
+import static com.demo.tools.doctorappointment.autoconfigure.util.api.RestParams.LIMIT_VALUE;
+import static com.demo.tools.doctorappointment.autoconfigure.util.api.RestParams.OFFSET_VALUE;
+
 
 public class OffsetLimitPageable extends PageRequest {
 

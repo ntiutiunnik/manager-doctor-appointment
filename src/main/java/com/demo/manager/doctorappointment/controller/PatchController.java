@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import static com.demo.manager.doctorappointment.util.resource.RestParams.ID_PATH_PARAM;
+import static com.demo.tools.doctorappointment.autoconfigure.util.api.RestParams.ID_PATH_PARAM;
 
 public interface PatchController<DTO, ID> {
 

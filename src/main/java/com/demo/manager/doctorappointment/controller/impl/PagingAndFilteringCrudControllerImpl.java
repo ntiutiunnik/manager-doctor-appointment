@@ -3,7 +3,7 @@ package com.demo.manager.doctorappointment.controller.impl;
 import com.demo.manager.doctorappointment.controller.PagingAndFilteringCrudController;
 import com.demo.manager.doctorappointment.service.PagingAndFilteringCrudService;
 import com.demo.manager.doctorappointment.specification.filter.FilterParam;
-import com.demo.manager.doctorappointment.util.OffsetLimitPageable;
+import com.demo.manager.doctorappointment.util.pagination.OffsetLimitPageable;
 import com.github.fge.jsonpatch.JsonPatch;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

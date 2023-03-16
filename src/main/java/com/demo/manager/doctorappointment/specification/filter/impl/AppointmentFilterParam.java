@@ -2,15 +2,20 @@ package com.demo.manager.doctorappointment.specification.filter.impl;
 
 
 import com.demo.manager.doctorappointment.specification.filter.FilterParam;
-import io.swagger.v3.oas.annotations.Parameter;
 
-public class AppointmentFilterParam extends FilterParam {
+import java.beans.ConstructorProperties;
 
-    @Parameter(name = "account_id")
+public class AppointmentFilterParam implements FilterParam {
+
     private Long accountId;
 
-    @Parameter(name = "doctor_id")
     private Long doctorId;
+
+    @ConstructorProperties({"account_id", "doctor_id"})
+    public AppointmentFilterParam(Long accountId, Long doctorId) {
+        this.accountId = accountId;
+        this.doctorId = doctorId;
+    }
 
     public Long getAccountId() {
         return accountId;

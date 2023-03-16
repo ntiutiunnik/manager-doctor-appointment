@@ -1,6 +1,6 @@
 package com.demo.manager.doctorappointment;
 
-import com.demo.manager.doctorappointment.config.SwaggerConfigurationListener;
+import com.demo.manager.doctorappointment.config.api.SwaggerConfigurationListener;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

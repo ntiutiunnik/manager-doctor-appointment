@@ -1,6 +1,6 @@
-package com.demo.manager.doctorappointment.config;
+package com.demo.manager.doctorappointment.config.api;
 
-import com.demo.manager.doctorappointment.util.resource.GeneralResource;
+import com.demo.manager.doctorappointment.resource.GeneralResource;
 import org.springframework.boot.context.event.ApplicationPreparedEvent;
 import org.springframework.context.ApplicationListener;
 import org.springframework.core.env.ConfigurableEnvironment;

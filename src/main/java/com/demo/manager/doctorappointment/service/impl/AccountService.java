@@ -1,10 +1,10 @@
 package com.demo.manager.doctorappointment.service.impl;
 
 import com.demo.manager.doctorappointment.dto.impl.AccountDto;
-import com.demo.manager.doctorappointment.exception.CustomCrudException;
 import com.demo.manager.doctorappointment.mapper.impl.AccountMapper;
 import com.demo.manager.doctorappointment.model.impl.Account;
 import com.demo.manager.doctorappointment.repository.impl.AccountRepository;
+import com.demo.tools.doctorappointment.autoconfigure.exception.CustomCrudException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;

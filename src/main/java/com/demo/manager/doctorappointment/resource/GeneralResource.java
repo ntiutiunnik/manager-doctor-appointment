@@ -1,4 +1,4 @@
-package com.demo.manager.doctorappointment.util.resource;
+package com.demo.manager.doctorappointment.resource;
 
 public final class GeneralResource {
 

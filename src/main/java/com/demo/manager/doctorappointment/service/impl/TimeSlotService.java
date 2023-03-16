@@ -1,10 +1,10 @@
 package com.demo.manager.doctorappointment.service.impl;
 
 import com.demo.manager.doctorappointment.dto.impl.TimeSlotDto;
-import com.demo.manager.doctorappointment.exception.CustomCrudException;
 import com.demo.manager.doctorappointment.mapper.impl.TimeSlotMapper;
 import com.demo.manager.doctorappointment.model.impl.TimeSlot;
 import com.demo.manager.doctorappointment.repository.impl.TimeSlotRepository;
+import com.demo.tools.doctorappointment.autoconfigure.exception.CustomCrudException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Service;
 

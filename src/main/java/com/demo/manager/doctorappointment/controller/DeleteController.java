@@ -4,7 +4,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import static com.demo.manager.doctorappointment.util.resource.RestParams.ID_PATH_PARAM;
+import static com.demo.tools.doctorappointment.autoconfigure.util.api.RestParams.ID_PATH_PARAM;
 
 public interface DeleteController<ID> {
 
