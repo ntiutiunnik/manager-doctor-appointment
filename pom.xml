@@ -26,7 +26,7 @@
     <repositories>
         <repository>
             <id>doctor-appointment-platform-artifactory</id>
-            <url>https://github.com/${repository-owner}/${repository-name}</url>
+            <url>https://github.com/${repository-owner}/${repository-name}/blob/${branch-name}/tools-doctor-appointment-auto-configure-1.0-SNAPSHOT.jar?raw=true</url>
             <snapshots>
                 <enabled>true</enabled>
                 <updatePolicy>always</updatePolicy>
@@ -61,7 +61,7 @@
         <!-- Internal dependencies -->
         <dependency>
             <groupId>com.demo.tools</groupId>
-            <artifactId>doctor-appointment-auto-configure</artifactId>
+            <artifactId>tools-doctor-appointment-auto-configure</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
 
