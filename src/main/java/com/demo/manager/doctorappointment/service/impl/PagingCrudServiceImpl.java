@@ -66,6 +66,7 @@ public class PagingCrudServiceImpl<DTO extends BasicDto<ID>, ID, T extends Basic
     @Transactional
     public DTO update(ID id, JsonPatch patch) {
         T entity = retrieveById(id);
+        beforeSave(mapper.entityToDto(entity));
         entity = repository.save(applyPatch(entity, patch));
 
         return findById(entity.getId());

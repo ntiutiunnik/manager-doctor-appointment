@@ -36,6 +36,6 @@ public class AccountService extends PagingCrudServiceImpl<AccountDto, Long, Acco
     }
 
     private boolean isValid(String input) {
-        return input != null && input.length() > MINIMUM_LENGTH;
+        return input != null && input.length() >= MINIMUM_LENGTH;
     }
 }
