@@ -4,7 +4,6 @@ import com.demo.manager.doctorappointment.controller.PagingAndFilteringCrudContr
 import com.demo.manager.doctorappointment.service.PagingAndFilteringCrudService;
 import com.demo.manager.doctorappointment.specification.filter.FilterParam;
 import com.demo.manager.doctorappointment.util.pagination.OffsetLimitPageable;
-import com.github.fge.jsonpatch.JsonPatch;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -35,12 +34,6 @@ public class PagingAndFilteringCrudControllerImpl<DTO, ID, F extends FilterParam
     @Override
     public ResponseEntity<DTO> save(@RequestBody DTO dto) {
         DTO resultDto = service.save(dto);
-        return new ResponseEntity<>(resultDto, HttpStatus.OK);
-    }
-
-    @Override
-    public ResponseEntity<DTO> update(@PathVariable ID id, @RequestBody JsonPatch patch) {
-        DTO resultDto = service.update(id, patch);
         return new ResponseEntity<>(resultDto, HttpStatus.OK);
     }
 

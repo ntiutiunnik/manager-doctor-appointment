@@ -3,7 +3,6 @@ package com.demo.manager.doctorappointment.controller.impl;
 import com.demo.manager.doctorappointment.controller.PagingCrudController;
 import com.demo.manager.doctorappointment.service.PagingCrudService;
 import com.demo.manager.doctorappointment.util.pagination.OffsetLimitPageable;
-import com.github.fge.jsonpatch.JsonPatch;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -34,12 +33,6 @@ public class PagingCrudControllerImpl<DTO, ID> implements PagingCrudController<D
     @Override
     public ResponseEntity<DTO> save(@RequestBody DTO dto) {
         DTO resultDto = service.save(dto);
-        return new ResponseEntity<>(resultDto, HttpStatus.OK);
-    }
-
-    @Override
-    public ResponseEntity<DTO> update(@PathVariable ID id, @RequestBody JsonPatch patch) {
-        DTO resultDto = service.update(id, patch);
         return new ResponseEntity<>(resultDto, HttpStatus.OK);
     }
 
